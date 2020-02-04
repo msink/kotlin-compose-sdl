@@ -19,6 +19,7 @@ kotlin {
             }
         }
         commonTest {
+            kotlin.srcDir("src/unitTest/kotlin")
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
@@ -29,6 +30,10 @@ kotlin {
     targets.withType<KotlinNativeTarget> {
         sourceSets["${targetName}Main"].apply {
             kotlin.srcDir("src/nativeMain/kotlin")
+            kotlin.srcDir("src/libuiMain/kotlin")
+            dependencies {
+                implementation(project(":collections-immutable"))
+            }
         }
     }
 }

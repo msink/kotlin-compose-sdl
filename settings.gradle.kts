@@ -20,3 +20,4 @@ gradleEnterprise {
 }
 
 include(":collections-immutable")
+include(":compose-runtime")
