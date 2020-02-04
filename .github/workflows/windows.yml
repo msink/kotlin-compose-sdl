@@ -1,0 +1,15 @@
+name: Windows
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - uses: numworks/setup-msys2@v1
+        with:
+          update: true
+      - run: msys2do pacman -S mingw-w64-x86_64-SDL2 mingw-w64-i686-SDL2
+      - run: msys2do ./gradlew build --scan
