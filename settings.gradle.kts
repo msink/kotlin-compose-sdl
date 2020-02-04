@@ -18,3 +18,5 @@ gradleEnterprise {
         termsOfServiceAgree = "yes"
     }
 }
+
+include(":collections-immutable")
