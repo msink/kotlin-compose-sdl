@@ -1,0 +1,4 @@
+headers = SDL.h
+headerFilter = SDL*
+compilerOpts = -D_POSIX_SOURCE 
+compilerOpts.linux = -D_REENTRANT

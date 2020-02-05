@@ -21,3 +21,4 @@ gradleEnterprise {
 
 include(":collections-immutable")
 include(":compose-runtime")
+include(":SDL2")
