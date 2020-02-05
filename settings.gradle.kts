@@ -22,3 +22,4 @@ gradleEnterprise {
 include(":collections-immutable")
 include(":compose-runtime")
 include(":SDL2")
+include(":samples:tetris")
