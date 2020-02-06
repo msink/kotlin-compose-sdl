@@ -2,3 +2,6 @@ headers = SDL.h
 headerFilter = SDL*
 compilerOpts = -D_POSIX_SOURCE 
 compilerOpts.linux = -D_REENTRANT
+linkerOpts.osx = -L/opt/local/lib -L/usr/local/lib -lSDL2
+linkerOpts.linux = -L/usr/lib64 -L/usr/lib/x86_64-linux-gnu -lSDL2
+linkerOpts.mingw = -Wl,-Bstatic -lstdc++ -static -limm32 -lole32 -loleaut32 -lversion -lwinmm -lsetupapi -mwindows
