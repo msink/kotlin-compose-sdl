@@ -41,9 +41,10 @@ kotlin {
     targets.withType<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget> {
         sourceSets["${targetName}Main"].apply {
             kotlin.srcDir("src/nativeMain/kotlin")
-            kotlin.srcDir("src/libuiMain/kotlin")
+            kotlin.srcDir("src/sdlMain/kotlin")
             dependencies {
                 implementation(project(":collections-immutable"))
+                implementation(project(":SDL2"))
             }
         }
     }
