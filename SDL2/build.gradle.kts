@@ -42,7 +42,7 @@ kotlin {
     if (host.isWindows) {
         mingwX64 {
             val mingwPath = File(
-                System.getenv("RUNNER_TEMP")?.let { it + "/msys/msys64/mingw64" } ?:
+                System.getenv("RUNNER_TEMP")?.let { "$it/msys/msys64/mingw64" } ?:
                 System.getenv("MINGW64_DIR") ?: "C:/msys64/mingw64")
             compilations["main"].apply {
                 cinterops.create("sdl") {
@@ -56,7 +56,7 @@ kotlin {
         if (!isRunningInIde) {
             mingwX86 {
                 val mingwPath = File(
-                    System.getenv("RUNNER_TEMP")?.let { it + "/msys/msys64/mingw32" } ?:
+                    System.getenv("RUNNER_TEMP")?.let { "$it/msys/msys64/mingw32" } ?:
                     System.getenv("MINGW32_DIR") ?: "C:/msys64/mingw32")
                 compilations["main"].apply {
                     cinterops.create("sdl") {

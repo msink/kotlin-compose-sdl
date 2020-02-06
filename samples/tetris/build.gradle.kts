@@ -1,8 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
 
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
-
 plugins {
     kotlin("multiplatform")
 }
@@ -26,7 +23,7 @@ kotlin {
         }
     }
 
-    targets.withType<KotlinNativeTarget> {
+    targets.withType<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget> {
         compilations["main"].enableEndorsedLibs = true
         sourceSets["${targetName}Main"].apply {
             kotlin.srcDir("src/tetrisMain/kotlin")

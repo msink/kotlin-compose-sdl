@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
 
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-
 plugins {
     kotlin("multiplatform")
 }
@@ -39,7 +37,7 @@ kotlin {
         }
     }
 
-    targets.withType<KotlinNativeTarget> {
+    targets.withType<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget> {
         sourceSets["${targetName}Main"].apply {
             kotlin.srcDir("src/nativeMain/kotlin")
         }
