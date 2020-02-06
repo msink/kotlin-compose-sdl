@@ -14,9 +14,6 @@ kotlin {
             cinterops.create("sdl") {
                 includeDirs("/usr/include/SDL2")
             }
-            kotlinOptions.freeCompilerArgs = listOf(
-                "-include-binary", "/usr/lib/x86_64-linux-gnu/libSDL2.a"
-            )
         }
     }
 
@@ -25,9 +22,6 @@ kotlin {
             cinterops.create("sdl") {
                 includeDirs("/opt/local/include/SDL2", "/usr/local/include/SDL2")
             }
-            kotlinOptions.freeCompilerArgs = listOf(
-                "-include-binary", "/usr/local/lib/libSDL2.a"
-            )
         }
     }
 

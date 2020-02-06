@@ -11,6 +11,7 @@ kotlin {
         binaries {
             executable {
                 entryPoint = "sample.tetris.main"
+                linkerOpts("-L/usr/lib64", "-L/usr/lib/x86_64-linux-gnu", "-lSDL2")
             }
         }
     }
@@ -19,6 +20,7 @@ kotlin {
         binaries {
             executable {
                 entryPoint = "sample.tetris.main"
+                linkerOpts("-L/opt/local/lib", "-L/usr/local/lib", "-lSDL2")
             }
         }
     }
