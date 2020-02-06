@@ -13,3 +13,5 @@ jobs:
           update: true
       - run: msys2do pacman -S --noconfirm mingw-w64-x86_64-SDL2 mingw-w64-i686-SDL2
       - run: msys2do ./gradlew build --scan
+        env:
+          KONAN_DATA_DIR: d:\.konan
