@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 
@@ -6,10 +8,20 @@ plugins {
 }
 
 kotlin {
-    val os = org.gradle.internal.os.OperatingSystem.current()!!
-    if (os.isLinux) linuxX64("tetris")
-    if (os.isMacOsX) macosX64("tetris")
-    if (os.isWindows) mingwX64("tetris")
+    val isRunningInIde: Boolean = System.getProperty("idea.active") == "true"
+    val host = org.gradle.internal.os.OperatingSystem.current()!!
+    if (host.isLinux) {
+        linuxX64("tetris")
+    }
+    if (host.isMacOsX) {
+        macosX64("tetris")
+    }
+    if (host.isWindows) {
+        mingwX64("tetris")
+        if (!isRunningInIde) {
+            mingwX86()
+        }
+    }
 
     targets.withType<KotlinNativeTarget> {
         binaries {
