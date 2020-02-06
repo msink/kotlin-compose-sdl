@@ -12,6 +12,9 @@ kotlin {
     val host = org.gradle.internal.os.OperatingSystem.current()!!
     if (host.isLinux) {
         linuxX64()
+        if (!isRunningInIde) {
+            linuxArm32Hfp()
+        }
     }
     if (host.isMacOsX) {
         macosX64()

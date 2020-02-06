@@ -16,6 +16,17 @@ kotlin {
                 }
             }
         }
+        if (!isRunningInIde) {
+            linuxArm32Hfp {
+                val konanDir = System.getenv("KONAN_DATA_DIR")?.let { File(it) }
+                    ?: File(System.getProperty("user.home")).resolve(".konan")
+                compilations["main"].apply {
+                    cinterops.create("sdl") {
+                        includeDirs(konanDir.resolve("dependencies/target-sysroot-2-raspberrypi/usr/include/SDL2"))
+                    }
+                }
+            }
+        }
     }
 
     if (host.isMacOsX) {
