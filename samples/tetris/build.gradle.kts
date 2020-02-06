@@ -11,45 +11,43 @@ kotlin {
     val isRunningInIde: Boolean = System.getProperty("idea.active") == "true"
     val host = org.gradle.internal.os.OperatingSystem.current()!!
     if (host.isLinux) {
-        linuxX64("tetris")
+        linuxX64()
     }
     if (host.isMacOsX) {
-        macosX64("tetris")
+        macosX64()
     }
     if (host.isWindows) {
-        mingwX64("tetris")
+        mingwX64()
         if (!isRunningInIde) {
             mingwX86()
         }
     }
 
     targets.withType<KotlinNativeTarget> {
-        binaries {
-            executable {
-                entryPoint = "sample.tetris.main"
-            }
-        }
-
+        compilations["main"].enableEndorsedLibs = true
         sourceSets["${targetName}Main"].apply {
+            kotlin.srcDir("src/tetrisMain/kotlin")
+
             dependencies {
                 implementation(project(":SDL2"))
             }
         }
 
-        compilations["main"].enableEndorsedLibs = true
-    }
-}
+        binaries {
+            executable {
+                entryPoint = "sample.tetris.main"
 
-afterEvaluate {
-    val tetris: KotlinNativeTarget by kotlin.targets
-    val linkTasks = NativeBuildType.values().mapNotNull { tetris.binaries.getExecutable(it).linkTask }
-
-    linkTasks.forEach { linkTask ->
-        linkTask.doLast {
-            copy {
-                from(kotlin.sourceSets["tetrisMain"].resources)
-                into(linkTask.outputFile.get().parentFile)
-                exclude("*.rc")
+                val distTaskName = linkTaskName.replaceFirst("link", "dist")
+                val distTask = tasks.register<Copy>(distTaskName) {
+                    from("src/tetrisMain/resources")
+                    into(linkTask.outputFile.get().parentFile)
+                    exclude("*.rc")
+                    if (!konanTarget.family.isAppleFamily) {
+                        exclude("*.plist")
+                    }
+                    dependsOn(linkTask)
+                }
+                tasks["assemble"].dependsOn(distTask)
             }
         }
     }
