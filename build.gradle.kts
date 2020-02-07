@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 plugins {
-    kotlin("multiplatform") version "1.4.0-dev-1693-105" apply false
+    kotlin("multiplatform") version "1.3.70-eap-184" apply false
 }
 
 allprojects {

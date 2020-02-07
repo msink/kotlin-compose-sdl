@@ -15,7 +15,7 @@
  */
 
 package androidx.compose
-
+/*
 import kotlin.test.assertEquals
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -161,4 +161,4 @@ class ObserverMapTests {
         val actual = get(models).sorted()
         assertEquals(expected, actual)
     }
-}
+}*/
