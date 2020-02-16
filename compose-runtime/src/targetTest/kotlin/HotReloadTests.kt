@@ -18,28 +18,19 @@
 
 package androidx.compose
 
-import android.app.Activity
-import android.content.Context
-import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.junit.After
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
-import kotlin.test.assertEquals
-import kotlin.test.assertNotEquals
+import android.Activity
+import android.Context
+import android.ViewGroup
+import android.LinearLayout
+import android.TextView
+import kotlin.test.*
 
-@RunWith(AndroidJUnit4::class)
+@Ignore //TODO
 class HotReloadTests: BaseComposeTest() {
-    @After
+    @AfterTest
     fun teardown() {
         Compose.clearRoots()
     }
-
-    @get:Rule
-    override val activityRule = makeTestActivityRule()
 
     @Test
     fun composeView() {
@@ -66,8 +57,6 @@ class HotReloadTests: BaseComposeTest() {
     @Test
     fun composeEmittable() {
         var value = "First value"
-
-        val activity = activityRule.activity
 
         // Set the content of the view
         activity.uiThread {
@@ -182,8 +171,8 @@ fun Activity.setContent(content: () -> Unit) {
     Compose.composeInto(root, this, null, content as (@Composable() () -> Unit))
 }
 
-val Activity.contentView: View get() =
-    window.decorView.findViewById<ViewGroup>(android.R.id.content).getChildAt(0)
+val Activity.contentView: View get() = TODO()
+///    window.decorView.findViewById<ViewGroup>(android.R.id.content).getChildAt(0)
 
 val Activity.content: Node get() =
     (contentView as ViewEmitWrapper).emittable as Node

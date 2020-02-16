@@ -16,22 +16,14 @@
 
 package androidx.compose
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import junit.framework.TestCase
-import org.junit.After
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
+import kotlin.test.*
 
-@RunWith(AndroidJUnit4::class)
+@Ignore //TODO
 class DisposeTests: BaseComposeTest() {
-    @After
+    @AfterTest
     fun teardown() {
         Compose.clearRoots()
     }
-
-    @get:Rule
-    override val activityRule = makeTestActivityRule()
 
     @Test
     fun testDisposeComposition() {
@@ -60,7 +52,7 @@ class DisposeTests: BaseComposeTest() {
         fun assertLog(expected: String, block: () -> Unit) {
             log.clear()
             block()
-            TestCase.assertEquals(expected, log.joinToString())
+            assertEquals(expected, log.joinToString())
         }
 
         assertLog("onPreCommit, onActive") {

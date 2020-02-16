@@ -32,18 +32,9 @@
 @file:Suppress("PLUGIN_ERROR")
 package androidx.compose
 
-import android.os.Bundle
-import android.widget.LinearLayout
-import java.util.concurrent.CountDownLatch
-import java.util.concurrent.TimeUnit
-import kotlin.test.assertTrue
-import android.app.Activity
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.rule.ActivityTestRule
-import org.junit.After
-import org.junit.Rule
-import org.junit.runner.RunWith
-
+import android.Activity
+import android.LinearLayout
+import kotlin.test.*
 
 class TestActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,35 +44,34 @@ class TestActivity : Activity() {
         })
     }
 }
-fun makeTestActivityRule() = ActivityTestRule(TestActivity::class.java)
 
 private val ROOT_ID = 18284847
 
 internal val Activity.root get() = findViewById(ROOT_ID) as ViewGroup
 
 internal fun Activity.uiThread(block: () -> Unit) {
-    val latch = CountDownLatch(1)
+    ///val latch = CountDownLatch(1)
     var throwable: Throwable? = null
-    runOnUiThread(object : Runnable {
-        override fun run() {
+    ///runOnUiThread(object : Runnable {
+    ///    override fun run() {
             try {
                 block()
             } catch (e: Throwable) {
                 throwable = e
             } finally {
-                latch.countDown()
+    ///         latch.countDown()
             }
-        }
-    })
+    ///    }
+    ///})
 
-    val completed = latch.await(5, TimeUnit.SECONDS)
-    if (!completed) error("UI thread work did not complete within 5 seconds")
+    ///val completed = latch.await(5, TimeUnit.SECONDS)
+    ///if (!completed) error("UI thread work did not complete within 5 seconds")
     throwable?.let {
         throw when (it) {
-            is AssertionError -> AssertionError(it.localizedMessage, it)
+            is AssertionError -> AssertionError(it.message, it)
             else ->
                 IllegalStateException(
-                    "UI thread threw an exception: ${it.localizedMessage}",
+                    "UI thread threw an exception: ${it.message}",
                     it
                 )
         }
@@ -104,6 +94,7 @@ internal fun Activity.show(block: @Composable() () -> Unit): Composition {
 }
 
 internal fun Activity.waitForAFrame() {
+    /*TODO
     if (Looper.getMainLooper() == Looper.myLooper()) {
         throw Exception("Cannot be run from the main looper thread")
     }
@@ -115,13 +106,15 @@ internal fun Activity.waitForAFrame() {
     }
     assertTrue(latch.await(1, TimeUnit.MINUTES),
         "Time-out waiting for choreographer frame")
+    */
 }
 
 abstract class BaseComposeTest {
-
-    abstract val activityRule: ActivityTestRule<TestActivity>
-
-    val activity get() = activityRule.activity
+    val activity = TestActivity()
+    @AfterClass
+    fun dispose() {
+        activity.dispose()
+    }
 
     fun compose(
         composable: ViewComposer.() -> Unit

@@ -16,25 +16,15 @@
 @file:Suppress("PLUGIN_ERROR")
 package androidx.compose
 
-import android.widget.TextView
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import junit.framework.TestCase
-import org.junit.After
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
-import kotlin.test.assertEquals
-import kotlin.test.assertNull
+import android.TextView
+import kotlin.test.*
 
-@RunWith(AndroidJUnit4::class)
+@Ignore //TODO
 class RestartTests: BaseComposeTest() {
-    @After
+    @AfterTest
     fun teardown() {
         Compose.clearRoots()
     }
-
-    @get:Rule
-    override val activityRule = makeTestActivityRule()
 
     @Test
     fun restart_PersonModel_lambda() {
@@ -67,16 +57,16 @@ class RestartTests: BaseComposeTest() {
         }.then {
             val tvName = it.findViewById(tvIdName) as TextView
             val tvAge = it.findViewById(tvIdAge) as TextView
-            TestCase.assertEquals(PRESIDENT_NAME_1, tvName.text)
-            TestCase.assertEquals(PRESIDENT_AGE_1.toString(), tvAge.text)
+            assertEquals(PRESIDENT_NAME_1, tvName.text)
+            assertEquals(PRESIDENT_AGE_1.toString(), tvAge.text)
 
             president.name = PRESIDENT_NAME_16
             president.age = PRESIDENT_AGE_16
         }.then {
             val tvName = it.findViewById(tvIdName) as TextView
             val tvAge = it.findViewById(tvIdAge) as TextView
-            TestCase.assertEquals(PRESIDENT_NAME_16, tvName.text)
-            TestCase.assertEquals(PRESIDENT_AGE_16.toString(), tvAge.text)
+            assertEquals(PRESIDENT_NAME_16, tvName.text)
+            assertEquals(PRESIDENT_AGE_16.toString(), tvAge.text)
         }
     }
 
@@ -116,8 +106,8 @@ class RestartTests: BaseComposeTest() {
             repeat(5) { index ->
                 val tvName = activity.findViewById(tvIdNameBase + index) as TextView
                 val tvAge = activity.findViewById(tvIdAgeBase + index) as TextView
-                TestCase.assertEquals(PRESIDENT_NAME_1, tvName.text)
-                TestCase.assertEquals(PRESIDENT_AGE_1.toString(), tvAge.text)
+                assertEquals(PRESIDENT_NAME_1, tvName.text)
+                assertEquals(PRESIDENT_AGE_1.toString(), tvAge.text)
             }
 
             president.name = PRESIDENT_NAME_16
@@ -126,8 +116,8 @@ class RestartTests: BaseComposeTest() {
             repeat(5) { index ->
                 val tvName = activity.findViewById(tvIdNameBase + index) as TextView
                 val tvAge = activity.findViewById(tvIdAgeBase + index) as TextView
-                TestCase.assertEquals(PRESIDENT_NAME_16, tvName.text)
-                TestCase.assertEquals(PRESIDENT_AGE_16.toString(), tvAge.text)
+                assertEquals(PRESIDENT_NAME_16, tvName.text)
+                assertEquals(PRESIDENT_AGE_16.toString(), tvAge.text)
             }
         }
     }
@@ -161,16 +151,16 @@ class RestartTests: BaseComposeTest() {
         }.then {
             val tvName = it.findViewById(tvIdName) as TextView
             val tvAge = it.findViewById(tvIdAge) as TextView
-            TestCase.assertEquals(PRESIDENT_NAME_1, tvName.text)
-            TestCase.assertEquals(PRESIDENT_AGE_1.toString(), tvAge.text)
+            assertEquals(PRESIDENT_NAME_1, tvName.text)
+            assertEquals(PRESIDENT_AGE_1.toString(), tvAge.text)
 
             president.name = PRESIDENT_NAME_16
             president.age = PRESIDENT_AGE_16
         }.then {
             val tvName = it.findViewById(tvIdName) as TextView
             val tvAge = it.findViewById(tvIdAge) as TextView
-            TestCase.assertEquals(PRESIDENT_NAME_16, tvName.text)
-            TestCase.assertEquals(PRESIDENT_AGE_16.toString(), tvAge.text)
+            assertEquals(PRESIDENT_NAME_16, tvName.text)
+            assertEquals(PRESIDENT_AGE_16.toString(), tvAge.text)
         }
     }
 
@@ -251,8 +241,8 @@ class RestartTests: BaseComposeTest() {
             repeat(5) { index ->
                 val tvName = activity.findViewById(tvIdNameBase + index) as TextView
                 val tvAge = activity.findViewById(tvIdAgeBase + index) as TextView
-                TestCase.assertEquals(PRESIDENT_NAME_1, tvName.text)
-                TestCase.assertEquals(PRESIDENT_AGE_1.toString(), tvAge.text)
+                assertEquals(PRESIDENT_NAME_1, tvName.text)
+                assertEquals(PRESIDENT_AGE_1.toString(), tvAge.text)
             }
 
             president.name = PRESIDENT_NAME_16
@@ -261,8 +251,8 @@ class RestartTests: BaseComposeTest() {
             repeat(5) { index ->
                 val tvName = activity.findViewById(tvIdNameBase + index) as TextView
                 val tvAge = activity.findViewById(tvIdAgeBase + index) as TextView
-                TestCase.assertEquals(PRESIDENT_NAME_16, tvName.text)
-                TestCase.assertEquals(PRESIDENT_AGE_16.toString(), tvAge.text)
+                assertEquals(PRESIDENT_NAME_16, tvName.text)
+                assertEquals(PRESIDENT_AGE_16.toString(), tvAge.text)
             }
         }
     }

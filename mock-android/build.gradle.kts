@@ -23,32 +23,13 @@ kotlin {
         }
     }
 
-    sourceSets {
-        commonMain {
-            dependencies {
-                implementation(kotlin("stdlib-common"))
-            }
-        }
-        commonTest {
-            kotlin.srcDir("src/unitTest/kotlin")
-            dependencies {
-                implementation(kotlin("test-common"))
-                implementation(kotlin("test-annotations-common"))
-            }
-        }
-    }
-
     targets.withType<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget> {
+        compilations["main"].enableEndorsedLibs = true
         sourceSets["${targetName}Main"].apply {
             kotlin.srcDir("src/nativeMain/kotlin")
-            kotlin.srcDir("src/sdlMain/kotlin")
             dependencies {
-                implementation(project(":collections-immutable"))
-                implementation(project(":mock-android"))
+                implementation(project(":SDL2"))
             }
-        }
-        sourceSets["${targetName}Test"].apply {
-            kotlin.srcDir("src/targetTest/kotlin")
         }
     }
 }

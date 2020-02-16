@@ -21,5 +21,6 @@ gradleEnterprise {
 
 include(":collections-immutable")
 include(":compose-runtime")
+include(":mock-android")
 include(":SDL2")
 include(":samples:tetris")

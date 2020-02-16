@@ -17,14 +17,7 @@
 package androidx.compose
 
 // TODO(b/137794549): Remove View System-related expect/actuals
-actual typealias ViewParent = android.view.ViewParent
-
-// TODO(b/137794549): Remove View System-related expect/actuals
 actual typealias View = android.view.View
-
-// TODO(b/137794549): Remove View System-related expect/actuals
-actual val View.parent: ViewParent
-    get() = parent
 
 // TODO(b/137794549): Remove View System-related expect/actuals
 actual val View.context: Context
@@ -35,9 +28,6 @@ actual typealias ViewGroup = android.view.ViewGroup
 
 // TODO(b/137794549): Remove View System-related expect/actuals
 actual typealias Context = android.content.Context
-
-// TODO(b/137794549): Remove View System-related expect/actuals
-actual typealias FrameLayout = android.widget.FrameLayout
 
 // TODO(b/137794558): Create portable abstraction for scheduling
 actual typealias Looper = android.os.Looper

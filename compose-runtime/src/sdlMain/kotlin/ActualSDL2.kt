@@ -3,32 +3,17 @@
 package androidx.compose
 
 // TODO(b/137794549): Remove View System-related expect/actuals
-actual interface ViewParent //TODO typealias android.view.ViewParent
-
-// TODO(b/137794549): Remove View System-related expect/actuals
-actual open class View { //TODO typealias android.view.View
-    actual fun getTag(key: Int): Any { TODO() }
-    actual fun setTag(key: Int, tag: Any?)  { TODO() }
-}
-
-// TODO(b/137794549): Remove View System-related expect/actuals
-actual val View.parent: ViewParent
-    get() = TODO()
+actual typealias View = android.View
 
 // TODO(b/137794549): Remove View System-related expect/actuals
 actual val View.context: Context
-    get() = TODO()
+    get() = getContext()
 
 // TODO(b/137794549): Remove View System-related expect/actuals
-actual abstract class ViewGroup : View() {
-    actual fun removeAllViews() { TODO() }
-}
+actual typealias ViewGroup = android.ViewGroup
 
 // TODO(b/137794549): Remove View System-related expect/actuals
-actual abstract class Context //TODO typealias android.content.Context
-
-// TODO(b/137794549): Remove View System-related expect/actuals
-actual class FrameLayout actual constructor(context: Context) // TODO typealias android.widget.FrameLayout
+actual typealias Context = android.Context
 
 // TODO(b/137794558): Create portable abstraction for scheduling
 actual class Looper() //TODO typealias android.os.Looper

@@ -15,31 +15,20 @@
  */
 
 package androidx.compose
-
-import android.view.View
-import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
+/*TODO
+import android.View
+import android.ViewGroup
+import android.LinearLayout
+import android.TextView
 import androidx.compose.frames.currentFrame
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import junit.framework.TestCase.assertEquals
-import junit.framework.TestCase.assertFalse
-import junit.framework.TestCase.assertNotSame
-import junit.framework.TestCase.assertTrue
-import org.junit.After
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
+import kotlin.math.min
+import kotlin.test.*
 
-@RunWith(AndroidJUnit4::class)
 class RecomposerTests : BaseComposeTest() {
-    @After
+    @AfterTest
     fun teardown() {
         Compose.clearRoots()
     }
-
-    @get:Rule
-    override val activityRule = makeTestActivityRule()
 
     @Test
     fun testNativeViewWithAttributes() {
@@ -75,19 +64,19 @@ class RecomposerTests : BaseComposeTest() {
         }.then { activity ->
             tv1 = activity.findViewById(456) as TextView
         }.recomposeRoot().then { activity ->
-            assertEquals("Compose got called twice", 3, i)
+            assertEquals(3, i, "Compose got called twice")
 
             val tv2 = activity.findViewById(456) as TextView
 
             assertFalse(
-                "The text views should be different instances",
-                tv1 === tv2
+                tv1 === tv2,
+                "The text views should be different instances"
             )
 
             assertEquals(
-                "The unused child got removed from the view hierarchy",
                 1,
-                activity.root.childCount
+                activity.root.childCount,
+                "The unused child got removed from the view hierarchy"
             )
         }
     }
@@ -115,16 +104,17 @@ class RecomposerTests : BaseComposeTest() {
             val tv1 = activity.findViewById(456) as TextView
             val tv2 = activity.findViewById(567) as TextView
 
-            assertEquals("The linear layout should be the only child of root", 1,
-                activity.root.childCount)
-            assertEquals("Both children should have been added", 2, ll.childCount)
+            assertEquals(1, activity.root.childCount,
+                "The linear layout should be the only child of root")
+            assertEquals(2, ll.childCount,
+                "Both children should have been added")
             assertTrue(
-                "Should be the expected TextView (1)",
-                ll.getChildAt(0) === tv1
+                ll.getChildAt(0) === tv1,
+                "Should be the expected TextView (1)"
             )
             assertTrue(
-                "Should be the expected TextView (2)",
-                ll.getChildAt(1) === tv2
+                ll.getChildAt(1) === tv2,
+                "Should be the expected TextView (2)"
             )
         }
     }
@@ -148,14 +138,13 @@ class RecomposerTests : BaseComposeTest() {
         }.then { activity ->
             val ll = activity.findViewById(345) as LinearLayout
 
-            assertEquals("The linear layout should be the only child of root", 1,
-                activity.root.childCount)
-            assertEquals("Each item in the for loop should be a child", items.size, ll.childCount)
+            assertEquals(1, activity.root.childCount,
+                "The linear layout should be the only child of root")
+            assertEquals(items.size, ll.childCount,
+                "Each item in the for loop should be a child")
             items.forEachIndexed { index, i ->
-                assertEquals(
-                    "Should be the correct child", "some text $i",
-                    (ll.getChildAt(index) as TextView).text
-                )
+                assertEquals("some text $i", (ll.getChildAt(index) as TextView).text,
+                    "Should be the correct child")
             }
         }
     }
@@ -474,7 +463,7 @@ fun normalizeString(str: String): String {
     }
     if (lines.isEmpty()) return ""
     val toRemove = lines.first().takeWhile { it == ' ' }.length
-    return lines.joinToString("\n") { it.substring(Math.min(toRemove, it.length)) }
+    return lines.joinToString("\n") { it.substring(min(toRemove, it.length)) }
 }
 
 fun printChildHierarchy(root: ViewGroup): String {
@@ -487,7 +476,7 @@ fun printChildHierarchy(root: ViewGroup): String {
 
 fun printView(view: View, indent: Int, sb: StringBuilder) {
     val whitespace = " ".repeat(indent)
-    val name = view.javaClass.simpleName
+    val name = view::class.simpleName
     val attributes = printAttributes(view)
     if (view is ViewGroup && view.childCount > 0) {
         sb.appendln("$whitespace<$name$attributes>")
@@ -529,3 +518,4 @@ class Counter {
 
     operator fun get(key: String) = counts[key] ?: 0
 }
+*/

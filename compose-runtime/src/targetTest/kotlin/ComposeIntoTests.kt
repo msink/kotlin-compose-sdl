@@ -16,29 +16,17 @@
 
 package androidx.compose
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.filters.MediumTest
-import org.junit.After
-import org.junit.Assert.assertEquals
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
+import kotlin.test.*
 
-@RunWith(AndroidJUnit4::class)
+@Ignore //TODO
 class ComposeIntoTests: BaseComposeTest() {
-    @After
+    @AfterTest
     fun teardown() {
         Compose.clearRoots()
     }
 
-    @get:Rule
-    override val activityRule = makeTestActivityRule()
-
     @Test
-    @MediumTest
     fun testMultipleSetContentCalls() {
-        val activity = activityRule.activity
-
         var initializationCount = 0
         var commitCount = 0
         val composable = @Composable {

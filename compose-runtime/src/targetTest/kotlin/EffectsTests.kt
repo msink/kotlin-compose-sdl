@@ -16,28 +16,17 @@
 @file:Suppress("PLUGIN_ERROR")
 package androidx.compose
 
-import android.widget.Button
-import android.widget.TextView
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.filters.MediumTest
-import junit.framework.TestCase.assertEquals
-import junit.framework.TestCase.assertFalse
-import junit.framework.TestCase.assertTrue
-import org.junit.After
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
+import android.Button
+import android.TextView
+import kotlin.test.*
 
-@RunWith(AndroidJUnit4::class)
 @Suppress("PLUGIN_WARNING")
+@Ignore //TODO
 class EffectsTests : BaseComposeTest() {
-    @After
+    @AfterTest
     fun teardown() {
         Compose.clearRoots()
     }
-
-    @get:Rule
-    override val activityRule = makeTestActivityRule()
 
     @Test
     fun testMemoization1() {
@@ -644,7 +633,6 @@ class EffectsTests : BaseComposeTest() {
     }
 
     @Test
-    @MediumTest
     fun testAmbient2() {
         val MyAmbient = ambientOf<Int> { throw Exception("not set") }
 
@@ -692,16 +680,15 @@ class EffectsTests : BaseComposeTest() {
                 Root()
             }
         }.then {
-            assertTrue("Expected button to be created", buttonCreated)
+            assertTrue(buttonCreated, "Expected button to be created")
             buttonCreated = false
             requestRecompose?.invoke()
         }.then {
-            assertFalse("Expected button to not be recreated", buttonCreated)
+            assertFalse(buttonCreated,"Expected button to not be recreated")
         }
     }
 
     @Test
-    @MediumTest
     fun testAmbient_RecomposeScope() {
         val MyAmbient = ambientOf<Int> { throw Exception("not set") }
 
@@ -751,14 +738,14 @@ class EffectsTests : BaseComposeTest() {
                 Root()
             }
         }.then {
-            assertTrue("Expected component to be composed", componentComposed)
-            assertTrue("Expected button to be created", buttonCreated)
+            assertTrue(componentComposed, "Expected component to be composed")
+            assertTrue(buttonCreated,"Expected button to be created")
             buttonCreated = false
             componentComposed = false
             requestRecompose?.invoke()
         }.then {
-            assertTrue("Expected component to be composed", componentComposed)
-            assertFalse("Expected button to not be recreated", buttonCreated)
+            assertTrue(componentComposed, "Expected component to be composed")
+            assertFalse(buttonCreated, "Expected button to not be recreated")
         }
     }
 
